@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<title>Currency Converter</title>
+	<link rel="stylesheet"  href="main.css">
+  
+</head>
+
+
+
+<body>
+  <div class="grid">
+    <div class="row">
+		  <div class="start-sidebar"></div>
+		  <div class="start-sidebox">
+			 <h3>Currency Converter</h3>
+			   <h2>Convert currency from all over the world below</h2>
+          <form>
+            <select id="currency_list" name="Currency">
+              <option>From Currency</option>
+              </select>
+    
+               <input type="number" placeholder=" Currency Amount" id="currency_amount">
+
+              <select id="currency_list_to" name="Currency">
+              <option>To Currency</option>
+             </select>
+
+              =<output id="output">  0.0</output>
+           </form>
+           <button onclick="convertCurrency()">Convert</button>
+        </div>
+        
+	   </div>
+  </div>
+  <script>
+     if (!navigator.serviceWorker)
+      navigator.serviceWorker.register('/sw.js').then(function(reg) {
+        console.log("registered");
+      }).catch(function() {
+        console.log("failed");
+        });
+
+    </script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
+
