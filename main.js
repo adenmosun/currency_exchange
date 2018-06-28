@@ -1,7 +1,6 @@
 
 
 
-
 //list of currencies from api
 
 let select = document.getElementById('currency_list');
