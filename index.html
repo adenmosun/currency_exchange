@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
 	<title>Currency Converter</title>
-	<link rel="stylesheet"  href="main.css">
+	<link rel="stylesheet"  href="./main.css">
   
 </head>
 
@@ -32,19 +32,14 @@
            </form>
            <button onclick="convertCurrency()">Convert</button>
         </div>
-        
 	   </div>
   </div>
   <script>
-     if (!navigator.serviceWorker)
-      navigator.serviceWorker.register('/sw.js').then(function(reg) {
-        console.log("registered");
-      }).catch(function() {
-        console.log("failed");
-        });
-
-    </script>
-<script type="text/javascript" src="main.js"></script>
+      navigator.serviceWorker.register('sw.js', {
+        scope: './'
+      });
+  </script>
+<script type="text/javascript" src="./main.js"></script>
 </body>
 </html>
 
