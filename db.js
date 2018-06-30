@@ -1,18 +1,41 @@
 
-   import idb from 'idb';
+function processFile() {
 
- const dbPromise = idb.open('currency_exchange', 1, upgradeDB => {
-  upgradeDB.createObjectStore('currency_exchange');
-});
-
-
-const dbPromise = idb.open('currency_exchange', 1, upgradeDb => {
-  switch (upgradeDb.oldVersion) {
+    
+let dbPromise = idb.open('currency_exchange_db', 1, upgradeDb => {
+    
+    switch(upgradeDb.oldVersion) {
     case 0:
-      upgradeDb.createObjectStore('currency_exchange');
-      break;
-    default:
-      console.error('Incomplete');
-      break;
+      let keyValStore = upgradeDb.createObjectStore('currencies',  {keyPath: 'id', autoIncrement: true});
+    case 1:
+      let keyValstore = upgradeDb.createObjectStore('conversion', {keyPath: 'id', autoIncrement: true});
   }
+  
+  });
+      
+
+   //add currencies to db
+
+	dbPromise.then(db => {
+  		let tx = db.transaction('currencies', 'readwrite');
+  		let currencies = tx.objectStore('currencies');
+  		currencies.add({currencyName, currencyId});
+  		return tx.complete;
+	}).then(() => {
+  		console.log('added item to currencies!');
+
+	});
+
+    //add rates to db
+
+	dbPromise.then(db => {
+  		let tx = db.transaction('conversion', 'readwrite');
+  		let conversion = tx.objectStore('conversion');
+  		conversion.add({rate, convert_from, convert_to});
+  return tx.complete;
+}).then(() => {
+  console.log('added rate to conversion!');
+
 });
+
+}

@@ -28,18 +28,16 @@
               <option>To Currency</option>
              </select>
 
-              =<output id="output">  0.0</output>
+              <h2> Amount </h2> 
+              = <output id="output">  0.0</output>
            </form>
-           <button onclick="convertCurrency()">Convert</button>
+           <button onclick="convertCurrency()" class="button">Convert</button>
         </div>
 	   </div>
   </div>
-  <script>
-      navigator.serviceWorker.register('sw.js', {
-        scope: './'
-      });
-  </script>
-<script type="text/javascript" src="./main.js"></script>
-</body>
+<script src="./idb.js"></script>
+  <script src="main.js"></script>
+
+  <script src="db.js"></script></body>
 </html>
 

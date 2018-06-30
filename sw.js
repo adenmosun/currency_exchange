@@ -32,43 +32,29 @@ self.addEventListener('activate', (event) => {
 });
 
 
-// self.addEventListener('fetch', (event) => {
-//   event.respondWith(
-//     caches.match(event.request) .then((response) => {
-//         if (response) {
-//           return response;
-//         }
-//         const fetchRequest = event.request.clone();
-
-//         return fetch(fetchRequest).then( (response) => {
-//             if (!response || response.status !== 200 || response.type !== 'basic') {
-//               return response;
-//             }
-//             const responseToCache = response.clone();
-
-//             // caches.open(CACHE_NAME)
-//             //   .then((cache) => {
-//             //     cache.put(event.request, responseToCache);
-//             //   });
-            
-//             // return response;
-//           }
-//         )
-//       })
-//   )
-// });
-self.addEventListener('fetch', function(event) {
+addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(function(resp) {
-      return resp || fetch(event.request).then(function(response) {
-        return caches.open('cache_name').then(function(cache) {
-          cache.put(event.request, response.clone());
-          return response;
-        });  
-      });
-    })
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;     
+          
+        } else {
+          return fetch(event.request)   
+          
+            .then(res => caches.open(cache_name)
+            .then(cache => {
+              cache.put(event.request.url, res.clone());   
+            
+              return res;  
+            }))
+            .catch(err => caches.open("Error")
+            .then(cache => cache.match(cache_name)));
+        }
+      })
   );
-});
+});         
+
 
 
 self.addEventListener('message', (event) => {
